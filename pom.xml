@@ -79,7 +79,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.watermarkSpider.WatermarkSpiderApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>

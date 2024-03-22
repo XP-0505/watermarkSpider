@@ -16,6 +16,7 @@ import java.util.*;
 import static com.example.watermarkSpider.util.Const.userAgent;
 
 public class Wb {
+
     public static BaseResp video(String videoUrl) {
         BaseResp resp = new BaseResp();
         SpecificInfo specificInfo = new SpecificInfo();
@@ -48,9 +49,16 @@ public class Wb {
                 }
             }
             String videourl = renderDataJson.getJSONObject("status").getJSONObject("page_info").getJSONObject("media_info").get("stream_url").toString();
-            specificInfo.setUrlList(new ArrayList<String>() {{
-                add(videourl);
-            }});
+            try {
+                String datetime = String.valueOf(System.currentTimeMillis());
+                String fileName = datetime + ".mp4";
+                String newVideoUrl =  DownloadUtil.download(videourl, fileName);
+                specificInfo.setUrlList(new ArrayList<String>() {{
+                    add(newVideoUrl);
+                }});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             specificInfo.setType("weibo");
             resp.setSpecificInfo(specificInfo);
         } catch (Exception e) {

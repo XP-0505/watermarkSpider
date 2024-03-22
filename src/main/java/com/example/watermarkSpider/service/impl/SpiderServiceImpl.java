@@ -48,11 +48,11 @@ public class SpiderServiceImpl implements SpiderService {
             }
         }catch (Exception e){
             e.printStackTrace();
-            baseResp.setCode("200");
+            baseResp.setCode("201");
             baseResp.setMsg("未找到资源，请检查链接或链接类型！");
         }finally {
             if (baseResp.getSpecificInfo() == null){
-                baseResp.setCode("200");
+                baseResp.setCode("201");
                 baseResp.setMsg("未找到资源，请检查链接或链接类型！");
             }
         }

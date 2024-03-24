@@ -9,6 +9,9 @@
 | 图册 | √  |  √  | √  |  
 | 视频 | √  |  √  | √  |
 
+## 前端对应项目
+https://github.com/XP-0505/watermarkSpiderVue
+
 ## 请求示例
 
 请求地址：localhost:8011/spider/specificInfo

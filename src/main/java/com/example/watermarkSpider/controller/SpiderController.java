@@ -40,37 +40,33 @@ public class SpiderController {
         return baseResp;
     }
 
+    /**
+     * 处理文件下载请求。
+     *
+     * @param req 包含下载请求信息的对象，来自请求体。
+     * @return 响应下载结果的基类响应对象，包括成功与否、错误码等信息。
+     */
+    @RequestMapping("/download")
+    @ResponseBody
+    public BaseResp download(@RequestBody BaseReq req) {
+        // 调用spiderService处理下载请求，并返回下载结果
+        BaseResp baseResp = spiderService.downloadFile(req);
+        return baseResp;
+    }
+
+    /**
+     * 根据文件名查找文件。
+     *
+     * @param filename 通过URL路径变量传递的文件名
+     * @return 返回一个包含文件资源的ResponseEntity对象
+     */
     @RequestMapping("/file/{filename}")
     @ResponseBody
-    public ResponseEntity<Resource> file(@PathVariable("filename") String filename) {
-        // 构造文件路径
-        String newFilePath = filePath;
-        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-            newFilePath = "D:" + newFilePath;
-        }
-        Path filePath = Paths.get(newFilePath, filename);
-        File file = filePath.toFile();
-        // 检查文件是否存在
-        if (!file.exists() || !file.isFile()) {
-            return ResponseEntity.notFound().build();
-        }
-        // 读取文件内容
-        try {
-            Resource resource = new FileSystemResource(file);
-            // 设置响应头信息
-            String contentType = Files.probeContentType(filePath);
-            HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getName() + "\"");
-            headers.add(HttpHeaders.CONTENT_TYPE, contentType != null ? contentType : "application/octet-stream");
-
-            // 返回文件内容作为响应体
-            return ResponseEntity.ok()
-                    .headers(headers)
-                    .contentLength(file.length())
-                    .body(resource);
-        } catch (IOException e) {
-            e.printStackTrace(); // 实际应用中应使用更合适的错误处理
-            return ResponseEntity.internalServerError().build();
-        }
+    public ResponseEntity<Resource> findFile(@PathVariable("filename") String filename) {
+        // 调用spiderService来查找并返回指定文件名的文件
+        return spiderService.findFile(filename);
     }
+
+
+
 }

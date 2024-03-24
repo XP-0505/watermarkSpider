@@ -8,4 +8,6 @@ public class BaseReq {
     private String data;
     //请求类型
     private String type;
+
+    private String itemId;
 }

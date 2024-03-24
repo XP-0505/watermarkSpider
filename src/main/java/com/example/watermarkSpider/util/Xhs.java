@@ -1,5 +1,6 @@
 package com.example.watermarkSpider.util;
 
+import cn.hutool.core.date.DateTime;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.watermarkSpider.bean.response.BaseResp;
@@ -8,7 +9,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.watermarkSpider.util.Const.userAgent;
@@ -49,7 +53,23 @@ public class Xhs {
             specificInfo.setUrlList(new ArrayList<String>() {{
                 add(finalVideoUrl);
             }});
+            specificInfo.setItemId(firstNoteId);
+            String nickname = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").getJSONObject("user").get("nickname").toString();
+            String avatar = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").getJSONObject("user").get("avatar").toString();
+            String content = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("desc").toString();
+            String title = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("title").toString();
+            String time = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("time").toString();
+            String cover = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").getJSONArray("imageList").getJSONObject(0).get("urlDefault").toString();
+            Date date = new Date(Long.valueOf(time));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeStr = sdf.format(date);
+            specificInfo.setUsername(nickname);
+            specificInfo.setAvatar(avatar);
+            specificInfo.setContent(content);
+            specificInfo.setTime(timeStr);
+            specificInfo.setTitle(title);
             specificInfo.setType("xiaohongshu");
+            specificInfo.setCover(cover);
             resp.setSpecificInfo(specificInfo);
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,10 +107,36 @@ public class Xhs {
             }
             specificInfo.setUrlList(imageUrlList);
             specificInfo.setType("xiaohongshu");
+            specificInfo.setItemId(firstNoteId);
+            String nickname = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").getJSONObject("user").get("nickname").toString();
+            String avatar = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").getJSONObject("user").get("avatar").toString();
+            String content = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("desc").toString();
+            String time = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("time").toString();
+            String title = jsonObject.getJSONObject("note").getJSONObject("noteDetailMap").getJSONObject(firstNoteId).getJSONObject("note").get("title").toString();
+            Date date = new Date(Long.valueOf(time));
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String timeStr = sdf.format(date);
+            specificInfo.setUsername(nickname);
+            specificInfo.setAvatar(avatar);
+            specificInfo.setContent(content);
+            specificInfo.setTime(timeStr);
+            specificInfo.setTitle(title);
+
             resp.setSpecificInfo(specificInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resp;
     }
+
+    public static void main(String[] args) {
+        try {
+            String sub = "http://xhslink.com/9ysxuE";
+            String redirectUrl = Jsoup.connect(sub).header("user-agent", userAgent).followRedirects(true).execute().url().toString();
+            System.out.printf(redirectUrl);
+        }catch (Exception e){
+
+        }
+    }
+
 }

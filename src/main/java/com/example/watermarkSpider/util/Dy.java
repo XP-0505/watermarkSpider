@@ -31,9 +31,21 @@ public class Dy {
                 String scriptContent = scriptElement.html();
                 String substring = URLDecoder.decode(scriptContent, "UTF-8");
                 JSONObject jsonObject = JSONObject.parseObject(substring);
+                //视频地址
                 String play_url = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("video").getJSONObject("play_addr").getJSONArray("url_list").get(0).toString();
                 play_url = play_url.replaceAll("playwm", "play");
                 String finalPlay_url = play_url;
+                //其他信息
+                String itemId = jsonObject.getJSONObject("app").get("itemId").toString();
+                String content = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).get("desc").toString();
+                String username = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("author").get("nickname").toString();
+                String avatar = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("author").getJSONObject("avatar_thumb").getJSONArray("url_list").get(0).toString();
+                String cover = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("video").getJSONObject("cover").getJSONArray("url_list").get(0).toString();
+                specificInfo.setItemId(itemId);
+                specificInfo.setContent(content);
+                specificInfo.setUsername(username);
+                specificInfo.setAvatar(avatar);
+                specificInfo.setCover(cover);
                 specificInfo.setUrlList(new ArrayList<String>() {{
                     add(finalPlay_url);
                 }});
@@ -70,6 +82,15 @@ public class Dy {
                     imageUrlList.add(urlList);
                 }
                 specificInfo.setUrlList(imageUrlList);
+                String itemId = jsonObject.getJSONObject("app").get("itemId").toString();
+                String content = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).get("desc").toString();
+                String username = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("author").get("nickname").toString();
+                String avatar = jsonObject.getJSONObject("app").getJSONObject("videoInfoRes").getJSONArray("item_list").getJSONObject(0).getJSONObject("author").getJSONObject("avatar_thumb").getJSONArray("url_list").get(0).toString();
+                specificInfo.setItemId(itemId);
+                specificInfo.setContent(content);
+                specificInfo.setUsername(username);
+                specificInfo.setAvatar(avatar);
+
                 specificInfo.setType("douyin");
             }
             resp.setSpecificInfo(specificInfo);

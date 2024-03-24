@@ -64,6 +64,7 @@ public class KS {
 
     public static BaseResp image(String videoUrl) {
         BaseResp resp = new BaseResp();
+
         SpecificInfo specificInfo = new SpecificInfo();
         try {
             String url = videoUrl;

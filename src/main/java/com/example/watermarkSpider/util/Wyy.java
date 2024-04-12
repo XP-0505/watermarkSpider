@@ -81,7 +81,7 @@ public class Wyy {
             specificInfo.setUsername(nickname);
             specificInfo.setAvatar(avatar);
             specificInfo.setCover(cover);
-            specificInfo.setTitle(time);
+            specificInfo.setTime(time);
             specificInfo.setTitle(title);
             specificInfo.setUrlList(new ArrayList<String>() {{
                 add(dataUrl);

@@ -6,10 +6,7 @@ import com.example.watermarkSpider.bean.response.BaseResp;
 import com.example.watermarkSpider.config.ServerConfig;
 import com.example.watermarkSpider.mapper.VideoInfoRepository;
 import com.example.watermarkSpider.service.SpiderService;
-import com.example.watermarkSpider.util.DownloadUtil;
-import com.example.watermarkSpider.util.Dy;
-import com.example.watermarkSpider.util.Wb;
-import com.example.watermarkSpider.util.Xhs;
+import com.example.watermarkSpider.util.*;
 import org.springframework.data.domain.Example;;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -58,6 +55,8 @@ public class SpiderServiceImpl implements SpiderService {
                     baseResp = Xhs.video(data);
                 } else if (data.contains("weibo")) {
                     baseResp = Wb.video(data);
+                } else if (data.contains("网易云")) {
+                    baseResp = Wyy.video(data);
                 }
                 // 处理图片类型请求
             } else if ("image".equals(type)) {
@@ -104,7 +103,7 @@ public class SpiderServiceImpl implements SpiderService {
             if (!Files.exists(filePath)) {
                 videoInfoRepository.delete(videoInfo1);
                 saveFile(req);
-            }else {
+            } else {
                 baseResp.setData(videoInfo1.getVideoUrl());
             }
         } else {
@@ -134,7 +133,7 @@ public class SpiderServiceImpl implements SpiderService {
 
         // 生成完整的视频URL
         String url = serverConfig.getUrl();
-        newVideoUrl = url+ "/spider/file/" + fileName;
+        newVideoUrl = url + "/spider/file/" + fileName;
 
         // 创建视频信息对象并填充数据
         VideoInfo videoInfo1 = new VideoInfo();

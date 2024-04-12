@@ -4,20 +4,11 @@ import com.example.watermarkSpider.bean.request.BaseReq;
 import com.example.watermarkSpider.bean.response.BaseResp;
 import com.example.watermarkSpider.service.SpiderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static com.example.watermarkSpider.util.Const.filePath;
 
 @Controller
 @RequestMapping("/spider")

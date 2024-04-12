@@ -107,7 +107,7 @@ public class KS {
 
     public static void main(String[] args) {
         try {
-            String sub = "https://v.kuaishou.com/sDZeGv";
+            String sub = "https://v.kuaishou.com/tIlKHo";
             Connection.Response response = Jsoup.connect(sub).header("user-agent", userAgent).followRedirects(true).execute();
             String redirectUrl = response.url().toString();
             Map<String, String> cookies = null;
@@ -143,12 +143,11 @@ public class KS {
                 cookieString += entry.getKey() + "=" + entry.getValue() + ";";
             }
 
+
             String result = HttpRequest.post("https://v.m.chenzhongtech.com/rest/wd/photo/info?kpn=KUAISHOU&captchaToken=")
                     .header("user-agent", userAgent).header("Referer", redirectUrl)
                     .header("Content-Type","application/json")
-                    .header("Connection","keep-alive")
-                    .header("Accept","application/json, text/plain, */*")
-                    .header("Accept-Language","zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6")
+                    .header("Accept","*/*")
                     .header("Accept-Encoding","gzip, deflate, br")
                     .header("Host","v.m.chenzhongtech.com")
                     .header("Origin","https://v.kuaishou.com")
@@ -156,12 +155,7 @@ public class KS {
                     .header("Sec-Fetch-Mode","cors")
                     .header("Sec-Fetch-Site","same-site")
                     .header("Referer","https://v.kuaishou.com/tOggGY")
-                    .header("sec-ch-ua","\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"")
-                    .header("sec-ch-ua-mobile","?0")
-                    .header("sec-ch-ua-platform","\"Windows\"")
                     .header("Connection","keep-alive")
-                    .header("Content-Length","0")
-                    .header("TE","trailers")
                     .header("Cookie",cookieString)
                     .body(json).execute().body();
 

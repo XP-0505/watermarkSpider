@@ -33,9 +33,8 @@ https://github.com/XP-0505/watermarkSpiderVue
 | type | 类型（image-图册；video-视频） |
 
 ## 其他说明
+网易云音乐MV、QQ音乐MV无去水印视频。
 
-网易云音乐MV、QQ音乐MV无去水印视频
-接口调用默认返回视频或图册下载链接地址，如要下载到本地，请自行调用Download工具类中的download方法即可。
 
 ## 免责声明
 

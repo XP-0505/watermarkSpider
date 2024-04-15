@@ -14,7 +14,7 @@
 https://github.com/XP-0505/watermarkSpiderVue
 
 ## 数据库说明
-数据库采用H2内存数据库，启动项目自动配置数据库文件，无需手动创建，具体参见：/src/main/resources/application.yml
+数据库采用H2数据库，启动项目自动配置数据库文件，无需手动创建，具体参见：/src/main/resources/application.yml
 ## 原理说明
 
 ## 请求示例

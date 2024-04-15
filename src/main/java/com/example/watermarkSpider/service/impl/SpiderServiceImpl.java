@@ -57,6 +57,8 @@ public class SpiderServiceImpl implements SpiderService {
                     baseResp = Wb.video(data);
                 } else if (data.contains("网易云")) {
                     baseResp = Wyy.video(data);
+                } else if (data.contains("QQ音乐")) {
+                    baseResp = QQMusic.video(data);
                 }
                 // 处理图片类型请求
             } else if ("image".equals(type)) {

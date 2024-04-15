@@ -15,7 +15,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +27,6 @@ public class Wyy {
 
     public static BaseResp video(String videoUrl) {
         BaseResp resp = new BaseResp();
-        SpecificInfo specificInfo = new SpecificInfo();
         try {
             String url = videoUrl;
             String sub = "http://163cn.tv/" + url.split("http://163cn.tv/")[1].split("\\(")[0];
@@ -96,8 +94,9 @@ public class Wyy {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 time = sdf.format(new Date(Long.parseLong(time)));
             } else {
-                return null;
+                return resp;
             }
+            SpecificInfo specificInfo = new SpecificInfo();
             specificInfo.setItemId(id);
             specificInfo.setContent(content);
             specificInfo.setUsername(nickname);

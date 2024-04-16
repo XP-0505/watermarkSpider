@@ -61,6 +61,8 @@ public class SpiderServiceImpl implements SpiderService {
                     baseResp = QQMusic.video(data);
                 } else if (data.contains("火山")) {
                     baseResp = Hs.video(data);
+                } else if (data.contains("最右")) {
+                    baseResp = ZuiYou.video(data);
                 }
                 // 处理图片类型请求
             } else if ("image".equals(type)) {
@@ -73,6 +75,8 @@ public class SpiderServiceImpl implements SpiderService {
                     baseResp = Wb.image(data);
                 } else if (data.contains("火山")) {
                     baseResp = Hs.image(data);
+                } else if (data.contains("最右")) {
+                    baseResp = ZuiYou.image(data);
                 }
             }
         } catch (Exception e) {

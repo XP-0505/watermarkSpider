@@ -9,12 +9,19 @@
 | 图册 | √  |  √  | √  |    √    |   √    |
 | 视频 | √  |  √  | √  |         |        |
 
+| 平台 | 火山视频 | 西瓜视频 | 最右 | 
+|:--:|:----:|:----:|:--:|
+| 图册 |  √   |      | √  |
+| 视频 |  √   | 开发中  | √  |
+
 ## 前端对应项目
 
 https://github.com/XP-0505/watermarkSpiderVue
 
 ## 数据库说明
+
 数据库采用H2数据库，启动项目自动配置数据库文件，无需手动创建，具体参见：/src/main/resources/application.yml
+
 ## 原理说明
 
 ## 请求示例
@@ -33,8 +40,8 @@ https://github.com/XP-0505/watermarkSpiderVue
 | type | 类型（image-图册；video-视频） |
 
 ## 其他说明
-网易云音乐MV、QQ音乐MV无去水印视频。
 
+网易云音乐MV、QQ音乐MV无去水印视频。
 
 ## 免责声明
 
